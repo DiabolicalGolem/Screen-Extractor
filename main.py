@@ -165,7 +165,6 @@ def on_press(key):
 
     #ALT+F11 (Settings)
     if current == combo[5]:
-        os.system("ECHO [32m----------------------End of function----------------------[97m")
         return False
 
 def on_release(key):
@@ -238,4 +237,5 @@ with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
 
     if not listener.running:
         setting()
+        os.system("ECHO [32m----------------------End of function----------------------[97m")
         os.execl(sys.executable, '"{}"'.format(sys.executable), *sys.argv)

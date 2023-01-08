@@ -78,12 +78,13 @@ def screenRead():
 #Settings
 def setting():
     global line
-    
+
     with open(data+"\\settings.txt") as f:
         settingsLines = f.readlines()
 
-    os.system("ECHO [32m                 Settings\n[90mUse \"help\" to see accepted tokens[0m")
-    print("".join(settingsLines))
+    os.system("ECHO [32m                 Settings")
+    os.system("ECHO [90mUse \"help\" to see accepted tokens[97m")
+    print("[97m".join(settingsLines))
 
     while True:
         rootQuery = input("[93m>[0m")
@@ -220,5 +221,3 @@ def setting():
             
         elif accept == False and rootQuery != "":
             os.system("ECHO [91m\"" + rootQuery +"\" is not recognized as a valid input![0m")
-
-setting()
