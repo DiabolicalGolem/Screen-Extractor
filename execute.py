@@ -83,7 +83,7 @@ def setting():
         settingsLines = f.readlines()
 
     os.system("ECHO [32m                 Settings\n[90mUse \"help\" to see accepted tokens[0m")
-    os.system("ECHO ".join(settingsLines))
+    print("".join(settingsLines))
 
     while True:
         rootQuery = input("[93m>[0m")
@@ -101,7 +101,8 @@ def setting():
 
         if rootQuery.lower() == "help vars":
             accept = True
-            os.system("ECHO [32mAccepted variables:\n    \"doLoop\", \"loopCount\", \"sec\", \"x\", \"y\", \"height\", \"width\", \"raw\"[0m")
+            os.system("ECHO [32mAccepted variables:")
+            os.system("ECHO     \"doLoop\", \"loopCount\", \"sec\", \"x\", \"y\", \"height\", \"width\", \"raw\"[0m")
 
         if rootQuery.lower() == "cls" or rootQuery.lower() == "clear":
             accept = True
@@ -219,3 +220,5 @@ def setting():
             
         elif accept == False and rootQuery != "":
             os.system("ECHO [91m\"" + rootQuery +"\" is not recognized as a valid input![0m")
+
+setting()
