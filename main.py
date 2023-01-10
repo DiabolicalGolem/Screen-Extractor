@@ -17,9 +17,9 @@ combo = [
 current = set()
 
 #Find and set Directory path
-dir = os.path.dirname(__file__)
-data = os.path.dirname(__file__)+"\\data"
-os.system("CD "+dir) #Set Path
+dir = os.getcwd()
+data = os.getcwd()+"\\data"
+#os.system("CD "+dir) #Set Path
 
 #Variables for the Bounding box
 oldMouse = [0,0]

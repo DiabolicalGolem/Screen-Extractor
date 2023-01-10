@@ -46,4 +46,4 @@ def checkForSettings():
         os.system("ECHO [91m    Could not find settings.txt[0m")
         with open(data+"\\settings.txt","w") as f:
             f.write("doLoop: 0\nloopCount: 1\nsec: 0\nx: 0\ny: 0\nwidth 100\nheight: 100\nraw: 0")
-            os.system("ECHO [92m    Created settings.txt[0m")
+            os.system("ECHO 49[92m    Created settings.txt[0m")
