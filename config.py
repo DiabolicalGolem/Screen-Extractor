@@ -4,7 +4,7 @@ from PIL import Image, ImageDraw
 #Find Directory path
 data = os.path.dirname(__file__)+"\\data"
 
-def checkForSettings():
+def config():
     #Check for data folder
     os.system("echo [97mChecking for data folder[0m")
     if os.path.isdir(data) == False:

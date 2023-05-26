@@ -2,7 +2,7 @@ import os
 import sys
 from pynput import keyboard, mouse
 from execute import extract, autoWrite, rawRead, screenRead, setting
-from checkForSettings import checkForSettings
+from config import config
 
 #Initialize
 combo = [
@@ -29,7 +29,7 @@ awrite = False
 bwrite = False
 
 #Check if certain files exist, if not, make it so!
-checkForSettings()
+config()
 
 #Set Extractor variables from settings.txt
 with open(data+"\\settings.txt","r") as f:
