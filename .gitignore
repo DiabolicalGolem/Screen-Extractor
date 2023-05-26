@@ -4,6 +4,7 @@
 #Except
 !.gitignore
 !README.md
+!requirements.txt
 !start.bat
 !checkForSettings.py
 !main.py
