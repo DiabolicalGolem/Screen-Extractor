@@ -3,7 +3,7 @@
 
 #Except
 !.gitignore
-!.start.bat
-!.checkForSettings.py
-!.main.py
-!.execute.py
+!start.bat
+!checkForSettings.py
+!main.py
+!execute.py
