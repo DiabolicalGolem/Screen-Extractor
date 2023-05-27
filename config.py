@@ -1,20 +1,21 @@
 import platform
 import os
 from PIL import Image, ImageDraw
-from windowsConfig import 
+from windowsConfig import windowsConfig
 
 def config():
     #Check OS
     os.system("echo [97mChecking OS[0")
     operating = platform.system()
 
-    #Find Directory path
-    if operating == "Windows":
-        data = os.path.dirname(__file__)+"\\data"
-    elif operating == "Linux":
-        data = os.path.dirname(__file__)+"/data"
-
     os.system("echo [92m    Running on [1m"+operating+"[0m")
+    
+    #Configure for respective systems
+    if operating == "Windows":
+        windowsConfig()
+    elif operating == "Linux":
+        return 0
+
 
     #Check for libraries
     os.system("echo [97mChecking for installed libraries[0m")

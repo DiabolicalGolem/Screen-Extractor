@@ -6,8 +6,8 @@ def windowsConfig():
     data = os.path.dirname(__file__)+"\\data"
     
     #Check for libraries
-    os.system("echo [97mChecking for installed libraries[0m")
-
+    os.system("echo [97mInstalling required libraries[0m")
+    os.system("pip install -r requirements.txt")
 
     #Check for data folder
     os.system("echo [97mChecking for data folder[0m")
