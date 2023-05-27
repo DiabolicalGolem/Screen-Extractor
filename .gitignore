@@ -7,5 +7,7 @@
 !requirements.txt
 !start.bat
 !config.py
+!windowsConfig.py
+!linuxConfig.py
 !main.py
 !execute.py
