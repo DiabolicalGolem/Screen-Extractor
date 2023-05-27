@@ -1,34 +1,20 @@
-import platform
 import os
 from PIL import Image, ImageDraw
-from windowsConfig import 
 
-def config():
-    #Check OS
-    os.system("echo [97mChecking OS[0")
-    operating = platform.system()
-
+def windowsConfig():
     #Find Directory path
-    if operating == "Windows":
-        data = os.path.dirname(__file__)+"\\data"
-    elif operating == "Linux":
-        data = os.path.dirname(__file__)+"/data"
-
-    os.system("echo [92m    Running on [1m"+operating+"[0m")
-
+    data = os.path.dirname(__file__)+"\\data"
+    
     #Check for libraries
     os.system("echo [97mChecking for installed libraries[0m")
-    
+
 
     #Check for data folder
     os.system("echo [97mChecking for data folder[0m")
     if os.path.isdir(data) == False:
         os.system("echo [91m    Could not find data folder[0m")
 
-        if operating == "Windows":
-            os.system("mkdir "+data)
-        elif operating == "Linux":
-            os.system
+        os.system("mkdir "+data)
         os.system("echo [92m    Created data folder[0m")
     else:
         os.system("echo [92m    Found data folder[0m")
