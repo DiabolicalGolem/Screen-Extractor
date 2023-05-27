@@ -2,6 +2,8 @@
 <h2>Extracts text from a region of the screen, saves it to a text file and much more!</h2>
 <h6>Designed to be compatible with Linux</h6>
 
+---
+
 <h3>About</h3>
 
 Using hotkeys, this program can:
