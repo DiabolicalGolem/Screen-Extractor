@@ -1,5 +1,8 @@
+#Cross-compatibility logic at 26 and at 61
+
 import os
 import sys
+import platform
 from pynput import keyboard, mouse
 from execute import extract, autoWrite, rawRead, screenRead, setting
 from config import config
@@ -16,23 +19,35 @@ combo = [
 
 current = set()
 
+#Find OS
+operating = platform.system()
+
 #Find and set Directory path
-dir = os.path.dirname(__file__)
-data = os.path.dirname(__file__)+"\\data"
+if operating == "Windows":
+    dir = os.path.dirname(__file__)
+    dir_data = os.path.dirname(__file__)+"\\data"
+    dir_settings = dir_data+"\\settngs.txt"
+    dir_extractedText = dir_data+"\\extractedText.txt"
+elif operating == "Linux":
+    dir = os.path.dirname(__file__)
+    dir_data = os.path.dirname(__file__)+"/data"
+    dir_settings = dir_data+"/settings.txt"
+    dir_extractedText = dir_data+"/extractedText.txt"
+
 os.system("cd "+dir) #Set Path
 
 #Variables for the Bounding box
 oldMouse = [0,0]
 newMouse = [0,0]
 
-awrite = False
-bwrite = False
+awrite = False  #AutoWrite
+bwrite = False  #Both Write
 
 #Check if certain files exist, if not, make it so!
 config()
 
 #Set Extractor variables from settings.txt
-with open(data+"\\settings.txt","r") as f:
+with open(dir_settings,"r") as f:
     settings = f.readlines()
     doLoop = bool(int(settings[0].replace("\n","").split(" ")[1]))
     loopCount = int(settings[1].replace("\n","").split(" ")[1])
@@ -43,7 +58,11 @@ with open(data+"\\settings.txt","r") as f:
     height = int(settings[6].replace("\n","").split(" ")[1])
     raw = bool(int(settings[7].replace("\n","").split(" ")[1]))
 
-os.system("cls")
+if operating == "Windows":
+    os.system("cls")
+elif operating == "Linux":
+    os.system("clear")
+
 os.system("echo [92m                 Welcome to ScreenExtractor!")
 os.system("echo [97mThis program can extract text information from a specified ")
 os.system("echo region of your screen and then save it to a [93mfile[97m. ")
@@ -51,6 +70,7 @@ os.system("echo [94mSHIFT+ESC [97m= Exit program    [94mALT+N [97m= Set Boun
 os.system("echo [94mALT+M [97m= Extract Screen    [94mALT+, [97m= AutoWrite")
 os.system("echo [94mALT+. [97m= Run Both    [94mALT+F11 [97m= Settings")
 
+#Bounding Box logic
 def on_click(x,y,button,pressed):
     if pressed:
         oldMouse[0] = x
@@ -60,6 +80,7 @@ def on_click(x,y,button,pressed):
         newMouse[1] = y
         return False
 
+#Hotkey logic
 def on_press(key):
     global settings, doLoop, loopCount, sec, sx, sy, width, height, raw, awrite, bwrite
 
@@ -110,7 +131,7 @@ def on_press(key):
             height = abs(oldMouse[1]-newMouse[1])
 
             try:
-                with open(data+"\\settings.txt","w") as f:
+                with open(dir_settings,"w") as f:
                     f.write("doLoop: 0\nloopCount: 1\nsec: 0\nx: "+str(sx)+"\ny: "+str(sy)+"\nwidth "+str(width)+"\nheight: "+str(height)+"\nraw: 0")
                     os.system("echo [92mSet Bounding Box to: [93m("+str(sx)+","+str(sy)+"), ("+str(sx+width)+","+str(sy+height)+")[97m")
             except IOError:
@@ -125,12 +146,12 @@ def on_press(key):
 
         #Saves raw, unaltered text to extractedText.txt
         if raw:
-            oldTextTimeStamp = os.path.getmtime(data+"\\extractedText.txt")
+            oldTextTimeStamp = os.path.getmtime(dir_extractedText)
 
-            with open(data+"\\extractedText.txt", 'w') as f:
+            with open(dir_extractedText, 'w') as f:
                 f.write(rawRead())
             
-            newTextTimeStamp = os.path.getmtime(data+"\\extractedText.txt")
+            newTextTimeStamp = os.path.getmtime(dir_extractedText)
 
             if oldTextTimeStamp != newTextTimeStamp:
                 os.system("echo [92mSuccessfully [97msaved extracted text to [93mextractedText.txt[97m")
@@ -139,19 +160,19 @@ def on_press(key):
 
         #Saves formatted text to extractedText.txt
         else:
-            oldTextTimeStamp = os.path.getmtime(data+"\\extractedText.txt")
+            oldTextTimeStamp = os.path.getmtime(dir_extractedText)
 
-            with open(data+"\\extractedText.txt", 'w') as f:
+            with open(dir_extractedText, 'w') as f:
                 f.write(screenRead())
             
-            newTextTimeStamp = os.path.getmtime(data+"\\extractedText.txt")
+            newTextTimeStamp = os.path.getmtime(dir_extractedText)
             
             if oldTextTimeStamp != newTextTimeStamp:
                 os.system("echo [92mSuccessfully [97msaved extracted text to [93mextractedText.txt[97m")
             else:
                 os.system("echo [91mFailed [97mto save extracted text to [93mextractedText.txt[97m")
 
-        os.system("START "+data+"\\extractedText.txt")
+        os.system("start "+dir_extractedText)
         current.clear()
         os.system("echo [32m----------------------End of function----------------------[97m")
 
@@ -173,7 +194,7 @@ def on_release(key):
     #ALT+,
     if key == keyboard.Key.alt_l and awrite:
         awrite = False
-        text = open(data+"\\extractedText.txt","r").read()
+        text = open(dir_extractedText,"r").read()
         autoWrite(text,loopCount,sec)
 
         current.clear()
@@ -186,12 +207,12 @@ def on_release(key):
             extract(sx,sy,width,height)
 
             if raw:
-                oldTextTimeStamp = os.path.getmtime(data+"\\extractedText.txt")
+                oldTextTimeStamp = os.path.getmtime(dir_extractedText)
 
-                with open(data+"\\extractedText.txt", 'w') as f:
+                with open(dir_extractedText, 'w') as f:
                     f.write(rawRead())
                 
-                newTextTimeStamp = os.path.getmtime(data+"\\extractedText.txt")
+                newTextTimeStamp = os.path.getmtime(dir_extractedText)
 
                 if oldTextTimeStamp != newTextTimeStamp:
                     os.system("echo [92mSuccessfully [97msaved extracted text to [93mextractedText.txt[97m")
@@ -200,19 +221,19 @@ def on_release(key):
 
             #Saves formatted text to extractedText.txt
             else:
-                oldTextTimeStamp = os.path.getmtime(data+"\\extractedText.txt")
+                oldTextTimeStamp = os.path.getmtime(dir_extractedText)
 
-                with open(data+"\\extractedText.txt", 'w') as f:
+                with open(dir_extractedText, 'w') as f:
                     f.write(screenRead())
                 
-                newTextTimeStamp = os.path.getmtime(data+"\\extractedText.txt")
+                newTextTimeStamp = os.path.getmtime(dir_extractedText)
                 
                 if oldTextTimeStamp != newTextTimeStamp:
                     os.system("echo [92mSuccessfully [97msaved extracted text to [93mextractedText.txt[97m")
                 else:
                     os.system("echo [91mFailed [97mto save extracted text to [93mextractedText.txt[97m")
             
-            text = open(data+"\\extractedText.txt","r").read()
+            text = open(dir_extractedText,"r").read()
             autoWrite(text,1,sec)
 
         os.system("echo [32m----------------------End of function----------------------[97m")
