@@ -9,10 +9,10 @@ def windowsConfig():
     os.system("echo [97mInstalling required libraries[0m")
 
     if os.system("pip install -r requirements.txt") == 0:
-        os.system("echo [92m    Successfully installed required libraries [0m")
+        os.system("echo [92m    Successfully installed required libraries[0m")
     else:
-        os.system("echo [91m    Was not able to install required libraries")
-        os.system("echo    Make sure /"pip/" is installed and then restart this program")
+        os.system("echo [91m    Was not able to install required libraries")
+        os.system("echo    Make sure \"pip\" is installed and then restart this program[0m")
         os.system("pause")
         os.system("exit")
 
@@ -25,17 +25,6 @@ def windowsConfig():
         os.system("echo [92m    Created data folder[0m")
     else:
         os.system("echo [92m    Found data folder[0m")
-
-    
-    #Check for venv
-    os.system("echo [97mChecking for virtual environment")
-    if os.path.isfile(data+"\\.venv") == False:
-        os.system("echo [91m    Could not find .venv folder")
-
-        try:
-            os.system("python3 -m venv "+data+"\\.venv")
-        except:
-            os.system("python -m venv "+data+"\\.venv")
 
     #Check if certain files exist, if not, make it so!
     #Check for sourceImage.png
