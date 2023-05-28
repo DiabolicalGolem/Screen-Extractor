@@ -7,7 +7,14 @@ def windowsConfig():
     
     #Check for libraries
     os.system("echo [97mInstalling required libraries[0m")
-    os.system("pip install -r requirements.txt")
+
+    if os.system("pip install -r requirements.txt") == 0:
+        os.system("echo [92m    Successfully installed required libraries [0m")
+    else:
+        os.system("echo [91m    Was not able to install required libraries")
+        os.system("echo    Make sure /"pip/" is installed and then restart this program")
+        os.system("pause")
+        os.system("exit")
 
     #Check for data folder
     os.system("echo [97mChecking for data folder[0m")
