@@ -24,9 +24,9 @@ operating = platform.system()
 
 #Find and set Directory path
 if operating == "Windows":
-    dir = os.path.dirname(__file__)
-    dir_data = os.path.dirname(__file__)+"\\data"
-    dir_settings = dir_data+"\\settngs.txt"
+    dir = os.getcwd()
+    dir_data = os.getcwd()+"\\data"
+    dir_settings = dir_data+"\\settings.txt"
     dir_extractedText = dir_data+"\\extractedText.txt"
 elif operating == "Linux":
     dir = os.path.dirname(__file__)
@@ -145,34 +145,38 @@ def on_press(key):
         extract(sx,sy,width,height)
 
         #Saves raw, unaltered text to extractedText.txt
-        if raw:
-            oldTextTimeStamp = os.path.getmtime(dir_extractedText)
+        try:
+            if raw:
+                oldTextTimeStamp = os.path.getmtime(dir_extractedText)
 
-            with open(dir_extractedText, 'w') as f:
-                f.write(rawRead())
-            
-            newTextTimeStamp = os.path.getmtime(dir_extractedText)
+                with open(dir_extractedText, 'w') as f:
+                    f.write(rawRead())
+                
+                newTextTimeStamp = os.path.getmtime(dir_extractedText)
 
-            if oldTextTimeStamp != newTextTimeStamp:
-                os.system("echo [92mSuccessfully [97msaved extracted text to [93mextractedText.txt[97m")
+                if oldTextTimeStamp != newTextTimeStamp:
+                    os.system("echo [92mSuccessfully [97msaved extracted text to [93mextractedText.txt[97m")
+                else:
+                    os.system("echo [91mFailed [97mto save extracted text to [93mextractedText.txt[97m")
+
+            #Saves formatted text to extractedText.txt
             else:
-                os.system("echo [91mFailed [97mto save extracted text to [93mextractedText.txt[97m")
+                oldTextTimeStamp = os.path.getmtime(dir_extractedText)
 
-        #Saves formatted text to extractedText.txt
-        else:
-            oldTextTimeStamp = os.path.getmtime(dir_extractedText)
-
-            with open(dir_extractedText, 'w') as f:
-                f.write(screenRead())
+                with open(dir_extractedText, 'w') as f:
+                    f.write(screenRead())
+                
+                newTextTimeStamp = os.path.getmtime(dir_extractedText)
+                
+                if oldTextTimeStamp != newTextTimeStamp:
+                    os.system("echo [92mSuccessfully [97msaved extracted text to [93mextractedText.txt[97m")
+                else:
+                    os.system("echo [91mFailed [97mto save extracted text to [93mextractedText.txt[97m")
             
-            newTextTimeStamp = os.path.getmtime(dir_extractedText)
-            
-            if oldTextTimeStamp != newTextTimeStamp:
-                os.system("echo [92mSuccessfully [97msaved extracted text to [93mextractedText.txt[97m")
-            else:
-                os.system("echo [91mFailed [97mto save extracted text to [93mextractedText.txt[97m")
+            os.system("start "+dir_extractedText)
+        except:
+            os.system("echo [91mFailed to execute properly. Make sure Tesseract is installed!")    
 
-        os.system("start "+dir_extractedText)
         current.clear()
         os.system("echo [32m----------------------End of function----------------------[97m")
 
