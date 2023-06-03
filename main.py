@@ -1,3 +1,8 @@
+#Check if certain files exist, if not, make it so!
+try:
+    sys.argv[1] == '-n'
+except IndexError:
+    config()
 
 import os, subprocess, platform, sys, keyboard, mouse
 from settings import *
@@ -9,14 +14,6 @@ import variables
 
 print(variables.dir)
 os.system(f"cd {variables.dir}") #Set Path
-
-##Put Bounding variables and awrite and bwrite here?
-
-#Check if certain files exist, if not, make it so!
-try:
-    sys.argv[1] == '-n'
-except IndexError:
-    config()
 
 #Set Extractor variables from settings.txt
 with open(variables.dir_settings,"r") as f:
