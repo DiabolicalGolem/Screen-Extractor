@@ -18,8 +18,8 @@ def linuxConfig():
     else:
         os.system("echo [91m    Was not able to install required libraries")
         os.system("echo     Make sure you have \"requirements.txt\" and that \"pip\"")
-        os.system("echo is installed and then restart this program[0m")
-        os.system("read -p \"\"")
+        os.system("echo is installed, then restart this program[0m")
+        os.system("read -p ''")
         exit()
 
     #Check for data folder
