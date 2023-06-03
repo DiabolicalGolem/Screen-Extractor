@@ -7,11 +7,11 @@ def linuxConfig():
     
     #Check for libraries
     os.system("echo [97mInstalling required libraries")
-    os.system("echo (These libraries are required for the program to work,[0m")
+    os.system("echo \(These libraries are required for the program to work,[0m")
     os.system("echo and it will ask you to enter your sudo password.")
     os.system("To see which libraries are to be installed, check")
     os.system("echo [93mrequirements.txt [97mand to see which lines of code")
-    os.system("are being executed, look at the [93mlinuxConfig.py [97mfile.)")
+    os.system("are being executed, look at the [93mlinuxConfig.py [97mfile.\)")
 
     if os.system("sudo pip install -r requirements.txt") == 0:
         os.system("echo [92m    Successfully installed required libraries[0m")
