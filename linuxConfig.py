@@ -6,8 +6,8 @@ def linuxConfig():
     data = os.path.dirname(__file__)+"/data"
     
     #Check for libraries
-    os.system("echo [90mInstalling required libraries")
-    os.system("echo \(These libraries are required for the program to work,")
+    os.system("echo [97mInstalling required libraries")
+    os.system("echo [90m\(These libraries are required for the program to work,")
     os.system("echo and it will ask you to enter your sudo password.")
     os.system("echo To see which libraries are to be installed, check")
     os.system("echo [93mrequirements.txt [90mand to see which lines of code")
