@@ -12,9 +12,9 @@ def linuxConfig():
         os.system("echo [92m    Successfully installed required libraries[0m")
     else:
         os.system("echo [91m    Was not able to install required libraries")
-        os.system("echo    Make sure \"pip\" is installed and then restart this program[0m")
-        os.system("pause")
-        os.system("exit")
+        os.system("echo     Make sure you have \"requirements.txt\" and that \"pip\" is installed and then restart this program[0m")
+        os.system("pause >nul")
+        exit()
 
     #Check for data folder
     os.system("echo [97mChecking for data folder[0m")
@@ -43,7 +43,7 @@ def linuxConfig():
     if os.path.isfile(data+"/extractedText.txt") == False:
         os.system("echo [91m    Could not find extractedText.txt[0m")
 
-        os.system("echo > "+data+"/extractedText.txt")
+        os.system("echo >nul > "+data+"/extractedText.txt")
         if os.path.isfile(data+"/extractedText.txt") == False:
             os.system("echo [91m    Was unable to create extractedText.txt[0m")
         else:

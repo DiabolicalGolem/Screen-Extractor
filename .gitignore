@@ -6,8 +6,11 @@
 !README.md
 !requirements.txt
 !start.bat
+!variables.py
 !config.py
+!data
 !windowsConfig.py
 !linuxConfig.py
 !main.py
+!settings.py
 !execute.py
