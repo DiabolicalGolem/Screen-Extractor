@@ -1,3 +1,5 @@
+from config import *
+
 #Check if certain files exist, if not, make it so!
 try:
     sys.argv[1] == '-n'
@@ -7,7 +9,6 @@ except IndexError or IOError or NameError:
 import os, subprocess, platform, sys, keyboard, mouse
 from settings import *
 from execute import *
-from config import *
 
 #Import Variables
 import variables
