@@ -1,6 +1,5 @@
 import platform
 import os
-from PIL import Image, ImageDraw
 from windowsConfig import windowsConfig
 from linuxConfig import linuxConfig
 

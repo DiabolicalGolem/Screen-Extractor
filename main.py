@@ -1,3 +1,4 @@
+import sys
 from config import *
 
 #Check if certain files exist, if not, make it so!
@@ -6,7 +7,7 @@ try:
 except IndexError or IOError or NameError:
     config()
 
-import os, subprocess, platform, sys, keyboard, mouse
+import os, subprocess, keyboard, mouse
 from settings import *
 from execute import *
 
