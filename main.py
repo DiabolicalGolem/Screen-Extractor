@@ -1,7 +1,7 @@
 #Check if certain files exist, if not, make it so!
 try:
     sys.argv[1] == '-n'
-except IndexError:
+except IndexError or IOError or NameError:
     config()
 
 import os, subprocess, platform, sys, keyboard, mouse
