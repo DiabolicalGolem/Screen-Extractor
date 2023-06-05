@@ -7,7 +7,7 @@ def linuxConfig():
     #Check for libraries
     os.system("echo [97mInstalling required libraries[0m")
 
-    if os.system("./.venv/bin/pip install -r requirements.txt") == 0:
+    if os.system("sudo ./.venv/bin/pip install -r requirements.txt") == 0:
         os.system("echo [92m    Successfully installed required libraries[0m")
     else:
         os.system("echo [91m    Was not able to install required libraries")
@@ -29,7 +29,7 @@ def linuxConfig():
     #Check if certain files exist, if not, make it so!
     #Check for sourceImage.png
     from PIL import Image, ImageDraw
-    
+
     os.system("echo [97mChecking for sourceImage.png[0m")
     if os.path.isfile(f"{variables.dir_data}/sourceImage.png") == False:
         os.system("echo [91m    Could not find sourceImage.png[0m")
