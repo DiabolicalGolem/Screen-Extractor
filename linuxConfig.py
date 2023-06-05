@@ -1,5 +1,4 @@
 import os, sys
-from PIL import Image, ImageDraw
 
 #Import Variables
 import variables
@@ -29,6 +28,8 @@ def linuxConfig():
 
     #Check if certain files exist, if not, make it so!
     #Check for sourceImage.png
+    from PIL import Image, ImageDraw
+    
     os.system("echo [97mChecking for sourceImage.png[0m")
     if os.path.isfile(f"{variables.dir_data}/sourceImage.png") == False:
         os.system("echo [91m    Could not find sourceImage.png[0m")
