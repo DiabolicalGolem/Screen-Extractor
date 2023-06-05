@@ -8,16 +8,6 @@ def windowsConfig():
     #Set Directory
     os.system(f"cd {variables.dir}")
 
-    #Check for .venv
-    os.system("echo [97mChecking for .venv[0m")
-    if not os.path.isdir(".venv"):
-        os.system("echo [91m    Could not find .venv[0m")
-
-        try:
-            os.system(f"{sys.executable} -m venv .venv")
-        except:
-            os.system("echo [91m    Could not create .venv[0m")
-
     #Check for libraries
     os.system("echo [97mInstalling required libraries[0m")
 
