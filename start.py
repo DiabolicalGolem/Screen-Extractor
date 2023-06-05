@@ -12,7 +12,7 @@ if not os.path.isdir(".venv"):
         os.system("echo [91m    Could not create .venv[0m")
         input("Please fix and then restart program")
 else:
-    os.system("[92m    Found .venv folder[0m")
+    os.system("echo [92m    Found .venv folder[0m")
 
 if variables.operating == "Windows":
     os.system(f"{variables.dir}\\.venv\\Scripts\\python main.py")
