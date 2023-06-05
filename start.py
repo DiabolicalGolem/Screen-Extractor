@@ -1,8 +1,6 @@
 import os, sys
 import variables
 
-os.system(f"cd {variables.dir}")
-
 #Check for .venv
 os.system("echo [97mChecking for .venv[0m")
 if not os.path.isdir(".venv"):
@@ -19,4 +17,4 @@ else:
 if variables.operating == "Windows":
     os.system(f"{variables.dir}\\.venv\\Scripts\\python main.py")
 elif variables.operating == "Linux":
-    os.system(f"sudo {variables.dir}/.venv/bin/python main.py")
+    os.system(f"{variables.dir}/.venv/bin/python main.py")
