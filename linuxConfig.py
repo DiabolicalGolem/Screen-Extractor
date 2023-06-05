@@ -1,17 +1,41 @@
-import os
+import os, sys
 from PIL import Image, ImageDraw
 
 def linuxConfig():
     #Find Directory path
     data = os.path.dirname(__file__)+"/data"
+
+    
+    #Check for .venv
+    os.system("echo [97mChecking for .venv[0m")
+    if not os.path.isdir(".venv"):
+        os.system("echo [91m    Could not find .venv[0m")
+
+        try:
+            os.system(f"{sys.executable} -m venv .venv")
+        except:
+            os.system("echo [91m    Could not create .venv[0m")
+
+    #Check for libraries
+    os.system("echo [97mInstalling required libraries[0m")
+
+    os.system("./.venv/Scripts/activate")
+    if os.system("./.venv/Scripts/pip install -r requirements.txt") == 0:
+        os.system("echo [92m    Successfully installed required libraries[0m")
+    else:
+        os.system("echo [91m    Was not able to install required libraries")
+        os.system("echo     Make sure you have \"requirements.txt\" and that \"pip\"")
+        os.system("echo is installed, then restart this program[0m")
+        input("Press ENTER to terminate program")
+        exit()
     
     #Check for libraries
-    os.system("echo [97mInstalling required libraries")
-    os.system("echo [90m\(These libraries are required for the program to work,")
-    os.system("echo and it will ask you to enter your sudo password.")
-    os.system("echo To see which libraries are to be installed, check")
-    os.system("echo [93mrequirements.txt [90mand to see which lines of code")
-    os.system("echo are being executed, look at the [93mlinuxConfig.py [90mfile.\)[0m")
+    #os.system("echo [97mInstalling required libraries")
+    #os.system("echo [90m\(These libraries are required for the program to work,")
+    #os.system("echo and it will ask you to enter your sudo password.")
+    #os.system("echo To see which libraries are to be installed, check")
+    #os.system("echo [93mrequirements.txt [90mand to see which lines of code")
+    #os.system("echo are being executed, look at the [93mlinuxConfig.py [90mfile.\)[0m")
 
     if os.system("sudo pip install -r requirements.txt") == 0:
         os.system("echo [92m    Successfully installed required libraries[0m")

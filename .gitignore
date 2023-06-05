@@ -8,7 +8,7 @@
 !start.bat
 !variables.py
 !config.py
-!data
+!data\Tesseract
 !windowsConfig.py
 !linuxConfig.py
 !main.py

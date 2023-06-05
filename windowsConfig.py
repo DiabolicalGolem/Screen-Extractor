@@ -1,4 +1,4 @@
-import os, subprocess
+import os, sys
 from PIL import Image, ImageDraw
 
 #Import Variables
@@ -8,16 +8,27 @@ def windowsConfig():
     #Set Directory
     os.system(f"cd {variables.dir}")
 
+    #Check for .venv
+    os.system("echo [97mChecking for .venv[0m")
+    if not os.path.isdir(".venv"):
+        os.system("echo [91m    Could not find .venv[0m")
+
+        try:
+            os.system(f"{sys.executable} -m venv .venv")
+        except:
+            os.system("echo [91m    Could not create .venv[0m")
+
     #Check for libraries
     os.system("echo [97mInstalling required libraries[0m")
 
-    if os.system("pip install -r requirements.txt") == 0:
+    
+    os.system(".venv\\Scripts\\activate")
+    if os.system(".venv\\Scripts\\pip install -r requirements.txt") == 0:
         os.system("echo [92m    Successfully installed required libraries[0m")
     else:
         os.system("echo [91m    Was not able to install required libraries")
         os.system("echo     Make sure you have \"requirements.txt\" and that \"pip\"")
         os.system("echo is installed, then restart this program[0m")
-        os.system("echo >null")
         input("Press ENTER to terminate program")
         exit()
 #
