@@ -3,8 +3,6 @@ import variables
 
 os.system(f"cd {variables.dir}")
 
-os.system("title Screen-Extractor && mode con: cols=60 lines=30 && echo Working on compiling program. This may take a while...")
-
 #Check for .venv
 os.system("echo [97mChecking for .venv[0m")
 if not os.path.isdir(".venv"):
