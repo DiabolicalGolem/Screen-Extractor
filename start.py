@@ -19,4 +19,4 @@ else:
 if variables.operating == "Windows":
     os.system(f"{variables.dir}\\.venv\\Scripts\\python main.py")
 elif variables.operating == "Linux":
-    os.system(f"{variables.dir}/.venv/bin/python main.py")
+    os.system(f"sudo {variables.dir}/.venv/bin/python main.py")
