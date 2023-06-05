@@ -7,6 +7,8 @@ try:
 except IndexError or IOError or NameError:
     config()
 
+os.system(".venv\\Scripts\\activate")
+
 import os, subprocess, keyboard, mouse
 from settings import *
 from execute import *
@@ -14,7 +16,6 @@ from execute import *
 #Import Variables
 import variables
 
-print(variables.dir)
 os.system(f"cd {variables.dir}") #Set Path
 
 #Set Extractor variables from settings.txt
@@ -195,7 +196,7 @@ def funct_runBoth():
         if text != "":
             autoWrite(text,loopCount,sec)
         else:
-            os.system("[93mextractedText.txt[97m is [91mempty[97m")
+            os.system("echo [93mextractedText.txt[97m is [91mempty[97m")
             break
     
     if loopCount == 1:

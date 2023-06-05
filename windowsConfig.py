@@ -21,8 +21,6 @@ def windowsConfig():
     #Check for libraries
     os.system("echo [97mInstalling required libraries[0m")
 
-    
-    os.system(".venv\\Scripts\\activate")
     if os.system(".venv\\Scripts\\pip install -r requirements.txt") == 0:
         os.system("echo [92m    Successfully installed required libraries[0m")
     else:

@@ -5,7 +5,7 @@
 !.gitignore
 !README.md
 !requirements.txt
-!start.bat
+!start.py
 !variables.py
 !config.py
 !data\Tesseract
