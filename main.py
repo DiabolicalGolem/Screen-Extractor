@@ -8,8 +8,7 @@ except IndexError or IOError or NameError:
     config()
 
 import os, subprocess, keyboard, mouse
-from settings import *
-from execute import *
+import settings, execute
 
 #Import Variables
 import variables
@@ -104,7 +103,7 @@ def funct_boundingBox():
 
 #ALT+M (Extract screen)
 def funct_extract():
-    extract(sx,sy,width,height)
+    execute.extract(sx,sy,width,height)
 
     #Saves raw, unaltered text to extractedText.txt
     try:
@@ -112,7 +111,7 @@ def funct_extract():
             oldTextTimeStamp = os.path.getmtime(variables.dir_extractedText)
 
             with open(variables.dir_extractedText, 'w') as f:
-                f.write(rawRead())
+                f.write(execute.rawRead())
 
             newTextTimeStamp = os.path.getmtime(variables.dir_extractedText)
 
@@ -126,7 +125,7 @@ def funct_extract():
             oldTextTimeStamp = os.path.getmtime(variables.dir_extractedText)
 
             with open(variables.dir_extractedText,'w') as f:
-                f.write(screenRead())
+                f.write(execute.screenRead())
             
             newTextTimeStamp = os.path.getmtime(variables.dir_extractedText)
 
@@ -146,7 +145,7 @@ def funct_autoWrite():
     text = open(variables.dir_extractedText,'r').read()
 
     if text != "":
-        autoWrite(text,loopCount,sec)
+        execute.autoWrite(text,loopCount,sec)
     else:
         os.system("echo [93mextractedText.txt[97m is [91mempty[97m")
     
@@ -160,13 +159,13 @@ def funct_autoWrite():
 #ALT+. (Run both)
 def funct_runBoth():
     for i in range(loopCount):
-        extract(sx,sy,width,height)
+        execute.extract(sx,sy,width,height)
 
         if raw:
             oldTextTimeStamp = os.path.getmtime(variables.dir_extractedText)
 
             with open(variables.dir_extractedText, 'w') as f:
-                f.write(rawRead())
+                f.write(execute.rawRead())
             
             newTextTimeStamp = os.path.getmtime(variables.dir_extractedText)
 
@@ -179,7 +178,7 @@ def funct_runBoth():
             oldTextTimeStamp = os.path.getmtime(variables.dir_extractedText)
 
             with open(variables.dir_extractedText, 'w') as f:
-                f.write(screenRead())
+                f.write(execute.screenRead())
             
             newTextTimeStamp = os.path.getmtime(variables.dir_extractedText)
             
@@ -192,7 +191,7 @@ def funct_runBoth():
         text = open(variables.dir_extractedText,"r").read()
 
         if text != "":
-            autoWrite(text,loopCount,sec)
+            execute.autoWrite(text,loopCount,sec)
         else:
             os.system("echo [93mextractedText.txt[97m is [91mempty[97m")
             break
@@ -206,7 +205,7 @@ def funct_runBoth():
 
 #ALT+F11 (Settings)
 def funct_setting():
-    setting()
+    settings.setting()
     os.system("echo [32m----------------------End of function----------------------[97m")
     os.system(f"{sys.executable} {sys.argv[0]} -n")
 
