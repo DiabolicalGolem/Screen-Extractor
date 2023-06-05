@@ -7,8 +7,6 @@ try:
 except IndexError or IOError or NameError:
     config()
 
-os.system(".venv\\Scripts\\activate")
-
 import os, subprocess, keyboard, mouse
 from settings import *
 from execute import *
