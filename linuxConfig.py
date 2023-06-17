@@ -7,7 +7,8 @@ def linuxConfig():
     #Check for libraries
     os.system("echo [97mInstalling required libraries[0m")
 
-    if os.system("sudo ./.venv/bin/pip install -r requirements.txt") == 0:
+    #if os.system("./.venv/bin/pip install -r requirements.txt") == 0:
+    if os.system("sudo pip install -r requirements.txt") == 0:
         os.system("echo [92m    Successfully installed required libraries[0m")
     else:
         os.system("echo [91m    Was not able to install required libraries")

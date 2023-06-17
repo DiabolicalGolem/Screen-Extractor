@@ -17,15 +17,15 @@ os.system(f"cd {variables.dir}") #Set Path
 
 #Set Extractor variables from settings.txt
 with open(variables.dir_settings,"r") as f:
-    settings = f.readlines()
-    doLoop = bool(int(settings[0].replace("\n","").split(" ")[1]))
-    loopCount = int(settings[1].replace("\n","").split(" ")[1])
-    sec = int(settings[2].replace("\n","").split(" ")[1])
-    sx = int(settings[3].replace("\n","").split(" ")[1])
-    sy = int(settings[4].replace("\n","").split(" ")[1])
-    width = int(settings[5].replace("\n","").split(" ")[1])
-    height = int(settings[6].replace("\n","").split(" ")[1])
-    raw = bool(int(settings[7].replace("\n","").split(" ")[1]))
+    var_settings = f.readlines()
+    var_doLoop = bool(int(var_settings[0].replace("\n","").split(" ")[1]))
+    var_loopCount = int(var_settings[1].replace("\n","").split(" ")[1])
+    var_sec = int(var_settings[2].replace("\n","").split(" ")[1])
+    var_sx = int(var_settings[3].replace("\n","").split(" ")[1])
+    var_sy = int(var_settings[4].replace("\n","").split(" ")[1])
+    var_width = int(var_settings[5].replace("\n","").split(" ")[1])
+    var_height = int(var_settings[6].replace("\n","").split(" ")[1])
+    var_raw = bool(int(var_settings[7].replace("\n","").split(" ")[1]))
 
 try:
     subprocess.check_output(["clear"], stderr=subprocess.STDOUT, shell=True)
@@ -63,7 +63,7 @@ bool_settings = False
 #Hotkey Logic
 #ALT+N (Set bounding box)
 def funct_boundingBox():
-    global sx, sy, width, height
+    global var_sx, var_sy, var_width, var_height
     
     os.system("echo [93mClick and drag to create Bounding Box[97m")
 
@@ -75,27 +75,27 @@ def funct_boundingBox():
     #Check against mouse x's
     if oldMouse[0] < newMouse[0]:
         if oldMouse[1] < newMouse[1]:
-            sx = oldMouse[0]
-            sy = oldMouse[1]
+            var_sx = oldMouse[0]
+            var_sy = oldMouse[1]
         else:
-            sx = oldMouse[0]
-            sy = newMouse[1]
+            var_sx = oldMouse[0]
+            var_sy = newMouse[1]
     else:
         if oldMouse[1] < newMouse[1]:
-            sx = newMouse[0]
-            sy = oldMouse[1]
+            var_sx = newMouse[0]
+            var_sy = oldMouse[1]
         else:
-            sx = newMouse[0]
-            sy = newMouse[1]
+            var_sx = newMouse[0]
+            var_sy = newMouse[1]
     
     #Find width and height
-    width = abs(oldMouse[0]-newMouse[0])
-    height = abs(oldMouse[1]-newMouse[1])
+    var_width = abs(oldMouse[0]-newMouse[0])
+    var_height = abs(oldMouse[1]-newMouse[1])
 
     try:
         with open(variables.dir_settings,'w') as f:
-            f.write(f"doLoop: 0\nloopCount: 1\nsec: 0\nx: {str(sx)}\ny: {str(sy)}\nwidth {str(width)}\nheight: {str(height)}\nraw: 0")
-            os.system(f"echo [92mSet Bounding Box to: [93m({str(sx)},{str(sy)}), ({str(sx+width)},{str(sy+height)})[97m")
+            f.write(f"doLoop: 0\nloopCount: 1\nsec: 0\nx: {str(var_sx)}\ny: {str(var_sy)}\nwidth {str(var_width)}\nheight: {str(var_height)}\nraw: 0")
+            os.system(f"echo [92mSet Bounding Box to: [93m({str(var_sx)},{str(var_sy)}), ({str(var_sx+var_width)},{str(var_sy+var_height)})[97m")
     except IOError:
         os.system("echo [91mCould not set Bounding Box.[97m")
     
@@ -103,11 +103,11 @@ def funct_boundingBox():
 
 #ALT+M (Extract screen)
 def funct_extract():
-    execute.extract(sx,sy,width,height)
+    execute.extract(var_sx,var_sy,var_width,var_height)
 
     #Saves raw, unaltered text to extractedText.txt
     try:
-        if raw:
+        if var_raw:
             oldTextTimeStamp = os.path.getmtime(variables.dir_extractedText)
 
             with open(variables.dir_extractedText, 'w') as f:
@@ -145,23 +145,23 @@ def funct_autoWrite():
     text = open(variables.dir_extractedText,'r').read()
 
     if text != "":
-        execute.autoWrite(text,loopCount,sec)
+        execute.autoWrite(text,var_loopCount,var_sec)
     else:
         os.system("echo [93mextractedText.txt[97m is [91mempty[97m")
     
-    if loopCount == 1:
+    if var_loopCount == 1:
         os.system("echo [97m     Looped 1 time")
     else:
-        os.system(f"echo [97m     Looped {loopCount} times")
+        os.system(f"echo [97m     Looped {var_loopCount} times")
 
     os.system("echo [32m----------------------End of function----------------------[97m")
 
 #ALT+. (Run both)
 def funct_runBoth():
-    for i in range(loopCount):
-        execute.extract(sx,sy,width,height)
+    for i in range(var_loopCount):
+        execute.extract(var_sx,var_sy,var_width,var_height)
 
-        if raw:
+        if var_raw:
             oldTextTimeStamp = os.path.getmtime(variables.dir_extractedText)
 
             with open(variables.dir_extractedText, 'w') as f:
@@ -191,15 +191,15 @@ def funct_runBoth():
         text = open(variables.dir_extractedText,"r").read()
 
         if text != "":
-            execute.autoWrite(text,loopCount,sec)
+            execute.autoWrite(text,var_loopCount,var_sec)
         else:
             os.system("echo [93mextractedText.txt[97m is [91mempty[97m")
             break
     
-    if loopCount == 1:
+    if var_loopCount == 1:
         os.system("echo [97m     Looped 1 time")
     else:
-        os.system(f"echo [97m     Looped {loopCount} times")
+        os.system(f"echo [97m     Looped {var_loopCount} times")
 
     os.system("echo [32m----------------------End of function----------------------[97m")
 
