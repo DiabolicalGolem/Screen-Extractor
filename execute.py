@@ -50,6 +50,7 @@ def rawRead():
         os.system("echo [92mSuccessfully [97mextracted text from [93msourceImage.png[97m")
     except IOError:
         os.system("echo [91mFailed [97mto extract text from [93msourceImage.png[97m")
+        os.system("echo [91mMake sure you have \"Tesseract OCR\" installed![97m")
         raise Exception
 
     return text[:-1]

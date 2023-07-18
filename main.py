@@ -1,11 +1,11 @@
 import sys
-from config import *
+import variables, config
 
 #Check if certain files exist, if not, make it so!
 try:
     sys.argv[1] == '-n'
 except IndexError or IOError or NameError:
-    config()
+    config.config()
 
 import os, subprocess, keyboard, mouse
 import settings, execute
